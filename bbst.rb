@@ -78,6 +78,14 @@ class Tree
     value < node.data ? find(value, node.left) : find(value, node.right)
   end
 
+  def level_order (node = @root, queue = [])
+    print "#{node.data} "
+    queue << node.left unless node.left.nil?
+    queue << node.right unless node.right.nil?
+    return if queue.empty?
+    level_order(queue.shift, queue)
+  end
+
 end
 
 arr = [4,56,2,4,14,7,8,9,3,1]
@@ -101,3 +109,5 @@ tree.pretty_print
 puts "find 4"
 p tree.find(4)
 
+puts "Level order"
+tree.level_order
