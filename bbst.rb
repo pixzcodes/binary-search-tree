@@ -79,11 +79,32 @@ class Tree
   end
 
   def level_order (node = @root, queue = [])
-    print "#{node.data} "
+    puts "#{node.data}"
     queue << node.left unless node.left.nil?
     queue << node.right unless node.right.nil?
     return if queue.empty?
     level_order(queue.shift, queue)
+  end
+
+  def preorder node = @root
+    return if node.nil?
+    puts "#{node.data}"
+    preorder(node.left)
+    preorder(node.right)
+  end
+
+  def inorder node = @root
+    return if node.nil?
+    inorder(node.left)
+    puts "#{node.data}"
+    inorder(node.right)
+  end
+
+  def postorder node = @root
+    return if node.nil?
+    postorder(node.left)
+    postorder(node.right)
+    puts "#{node.data}"
   end
 
 end
@@ -111,3 +132,12 @@ p tree.find(4)
 
 puts "Level order"
 tree.level_order
+
+puts "Preorder"
+tree.preorder
+
+puts "Inorder"
+tree.inorder
+
+puts "Postorder"
+tree.postorder
